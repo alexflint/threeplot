@@ -1,0 +1,924 @@
+<html>
+<head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r69/three.min.js"></script>
+<script src="https://dl.dropboxusercontent.com/u/3587259/Code/Threejs/OrbitControls.js"></script>
+<style>
+body {
+  color: #000;
+  font-family:Monospace;
+  font-size:13px;
+  text-align:center;
+  font-weight: bold;
+
+  background-color: #fff;
+  margin: 0px;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div id="container"></div> 
+<script type="text/javascript">
+var container, stats;
+
+var camera, controls, scene, renderer;
+
+var cross;
+
+init();
+animate();
+
+function init() {
+
+  camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+  camera.position.z = 50;
+
+  controls = new THREE.OrbitControls( camera );
+  controls.addEventListener( 'change', render );
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
+  // Add mesh
+
+  // var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+  // var material = new THREE.MeshLambertMaterial( { color:0xffffff, shading: THREE.FlatShading } );
+
+  // for ( var i = 0; i < 500; i ++ ) {
+
+  //   var mesh = new THREE.Mesh( geometry, material );
+  //   mesh.position.x = ( Math.random() - 0.5 ) * 1000;
+  //   mesh.position.y = ( Math.random() - 0.5 ) * 1000;
+  //   mesh.position.z = ( Math.random() - 0.5 ) * 1000;
+  //   mesh.updateMatrix();
+  //   mesh.matrixAutoUpdate = false;
+  //   scene.add( mesh );
+
+  // }
+
+  // Add the polyline
+  var line_material = new THREE.LineBasicMaterial({
+  	color: 0x0000ff,
+  	linewidth: 4
+  });
+
+  var line_geometry = new THREE.Geometry();
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.52379067649, 0.487298880171, -0.111962540584));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.54435157692, 0.518095368263, -0.116232385543));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.56953643845, 0.551768240007, -0.102253994423));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.59023636349, 0.583740754801, -0.0589975317996));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.60977309652, 0.621075117482, 0.00724657696656));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.6110140079, 0.652531528998, 0.0917179274367));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.57615254387, 0.657331004604, 0.164104467758));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.50859110818, 0.650918043355, 0.201285495195));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.4327934247, 0.642870723068, 0.18722588018));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.36568423905, 0.646368899133, 0.137237816197));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.29753364201, 0.661210212904, 0.0757655376985));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.2274038821, 0.681599046475, 0.0181078802915));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.15008135143, 0.695280587405, -0.0393420323303));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(7.06949468142, 0.729602830393, -0.0936653387521));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.97307731157, 0.768913553939, -0.1388219665));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.87619923779, 0.817820987743, -0.162644201623));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.78127284497, 0.86707676779, -0.172682769599));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.69068988946, 0.914561756331, -0.17195140465));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.60846415345, 0.953021203266, -0.173647345904));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.52056451078, 0.976833949991, -0.181250726888));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.41942799571, 0.993669407825, -0.183934109086));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.30369271588, 1.00386489514, -0.177913391172));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.18748009506, 1.0130272207, -0.156440515933));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(6.08111134675, 1.02492358029, -0.152217626218));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.9675536793, 1.04728631659, -0.164984917288));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.84655250505, 1.07652756151, -0.177452237781));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.73125036887, 1.1115735439, -0.169161354732));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.62707431803, 1.14038642457, -0.150702875242));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.53187350546, 1.1601770547, -0.151226421061));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.42470997512, 1.17455222197, -0.167289258708));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.30243433571, 1.1715648261, -0.183419662346));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.17142514321, 1.16065270201, -0.175025586252));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(5.04559555758, 1.15011847323, -0.163148778157));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.92252142634, 1.14097932657, -0.174496760096));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.7893284949, 1.12547490941, -0.197924552428));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.65929172769, 1.10778601231, -0.188447831415));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.54159575102, 1.08011088702, -0.168494074051));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.43301376958, 1.04858493366, -0.168116499594));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.32046196881, 0.998078659545, -0.189422572721));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.20162021408, 0.927929776797, -0.201285495195));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(4.08037798638, 0.861368916645, -0.188886780084));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.96503160485, 0.810016134352, -0.175311958192));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.83873411613, 0.769931680945, -0.182409926188));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.70072184241, 0.738733718939, -0.192851346959));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.55227219642, 0.728568847021, -0.189088443742));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.42595191493, 0.721750673047, -0.170010980024));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.31578391397, 0.722245869065, -0.161901959791));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.19153242018, 0.73311879578, -0.177680424713));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(3.05515345386, 0.745306833068, -0.182215308037));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.91670382981, 0.761875290446, -0.164557962627));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.79984724445, 0.78788718817, -0.150635885652));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.67869610468, 0.827895396859, -0.160351523542));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.54422202067, 0.884052368633, -0.166829753525));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.40497458239, 0.947114983141, -0.154876700132));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.27262530883, 0.998273066454, -0.135464756427));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.14386633241, 1.04448528877, -0.13146582947));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(2.01119955524, 1.08175534494, -0.147767405478));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.86426722902, 1.10685108402, -0.155559130548));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.71760550625, 1.12938108357, -0.140277058078));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.58171929405, 1.15042830989, -0.129878966376));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.4410351262, 1.16464959757, -0.136404439504));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.30000480391, 1.17849284479, -0.138197529293));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.15538670484, 1.18594774065, -0.124646720788));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(1.0244117533, 1.18464239897, -0.112697802879));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.904255544064, 1.17129295719, -0.118255202855));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.77459741114, 1.13764796169, -0.13634744702));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.634188307337, 1.08330137529, -0.138393098381));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.491096331419, 1.02951359813, -0.116862436787));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.35988310927, 0.983156369028, -0.108737567697));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.224643031529, 0.929559215696, -0.127238632444));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(0.0822050377473, 0.875700152191, -0.137664160587));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.0645799320968, 0.821785730174, -0.124429074538));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.195819486653, 0.771850611186, -0.112074040922));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.308765845823, 0.721851226718, -0.111084874696));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.424920367953, 0.665138112011, -0.126168301042));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.550641748001, 0.597778500491, -0.133354421905));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.676544377101, 0.541098808636, -0.120712647893));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.799855719963, 0.494046362785, -0.111285910997));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.935814396876, 0.453563564312, -0.124917621661));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.08386386994, 0.420125870771, -0.133728298042));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.2303568246, 0.398599209241, -0.118847677912));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.35931199271, 0.379882238434, -0.10847297934));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.48355925139, 0.364665469908, -0.110532907983));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.61885476069, 0.34280806535, -0.126679293085));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.76661927229, 0.30917910368, -0.119293577349));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.90404035117, 0.287384831139, -0.0975143414211));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.03320308329, 0.275687644558, -0.0949615882518));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.17537353577, 0.272587538543, -0.111043725448));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.3301271678, 0.278338136832, -0.119231245222));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.47668369842, 0.291940190607, -0.100179326498));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.6085940448, 0.298282698909, -0.0963618401272));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.74427383611, 0.298624964981, -0.114289043611));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.8893839541, 0.289684824701, -0.132123737593));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.04096868777, 0.276354718576, -0.127296110654));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.1826976506, 0.26839155984, -0.113099058));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.32619284501, 0.265426363758, -0.113302163794));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.48008943571, 0.264062597794, -0.127675487228));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.63789009968, 0.271232227078, -0.125875920613));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.78464817448, 0.281589817383, -0.0996485109878));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.91870016321, 0.286587760556, -0.0907785764818));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.05080829746, 0.290670374622, -0.102750717811));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.19264063395, 0.287419538879, -0.115650323053));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.34282473975, 0.282912676026, -0.107247053775));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.48595469223, 0.287202258667, -0.0920138434337));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.6241309921, 0.295739828223, -0.0898657171232));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.76840245804, 0.301789829061, -0.0966850935659));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.91558825759, 0.31336411376, -0.0963582089019));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.04880305687, 0.323056939758, -0.0758906917586));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.16688611742, 0.321002496826, -0.0718397971687));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.28813393543, 0.313900174757, -0.0829621296109));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.41366650234, 0.297831132642, -0.0892996695006));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.53547052957, 0.264951920098, -0.0768664091447));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.6394820912, 0.219639597329, -0.0640353588812));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.72908567828, 0.157569294994, -0.0647598223392));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.81120278131, 0.0806952910647, -0.0726138578433));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.88651443431, -0.000510061216521, -0.0772250466834));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.9534903319, -0.0883121812172, -0.0740648810213));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.99359579178, -0.168142799051, -0.0681277819661));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.01790899722, -0.247661077286, -0.0698416348485));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.03108649271, -0.333842309549, -0.0759670442099));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.03704944439, -0.437769169547, -0.0803661401079));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.03666128351, -0.545814258958, -0.0655402243967));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.04551343685, -0.651102333969, -0.0446587702142));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.04810986667, -0.765428405387, -0.0440465323849));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.04215017827, -0.887291781895, -0.0559206491085));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.04440527289, -1.01599865735, -0.055815485188));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.03817171571, -1.14685019049, -0.0286690520866));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.01117091194, -1.25435295885, -0.0205886012142));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.97073559498, -1.35568215582, -0.0322715198208));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.9229101512, -1.46350313344, -0.0438287235183));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.8648848912, -1.58586347267, -0.0372487058996));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.81009134261, -1.70084244899, -0.0214567326554));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.75644480917, -1.80322488412, -0.0190716800982));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.69402254617, -1.90544089213, -0.0226585718613));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.63909846637, -2.02348760124, -0.0226690877049));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.60066399501, -2.14924336989, -0.00611878289342));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.56200940859, -2.25844664472, 0.00621514617975));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.52463799881, -2.35861760957, 0.0087950429548));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.47110903153, -2.46106543257, -0.00418909753325));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.4073995521, -2.58332593915, -0.00306847860921));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.35501567814, -2.70196177619, 0.0156930247497));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.32763819602, -2.82112490348, 0.0205981356487));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.31399059254, -2.95305824084, 0.0168299567124));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.31635661127, -3.09668236242, 0.0156034071506));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.31327000372, -3.2396663409, 0.0284020721555));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.31376330815, -3.36744605973, 0.0432003473459));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.30782229935, -3.47879090176, 0.0392200177491));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.29015216609, -3.58656417033, 0.0247918057995));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26309234317, -3.69351779231, 0.0215846068432));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.23684110006, -3.7839041137, 0.0229616630066));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.21878470501, -3.85680739806, 0.0204447573389));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.20452764346, -3.92493735556, 0.012308437974));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.20402274514, -4.00888428588, 0.0118939489139));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.20616498303, -4.10864285148, 0.0192094783639));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.20559874236, -4.19690625164, 0.0348458861787));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.18934572706, -4.26653386377, 0.0409530755635));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.16852730435, -4.31383592156, 0.0361834054316));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.12793861713, -4.3581234782, 0.0231340965403));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.07987463338, -4.39795489659, 0.0287359402665));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.03857508417, -4.4316849951, 0.0451515279));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.00304212277, -4.45673202939, 0.0590271686345));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.97622458525, -4.47035333656, 0.0727244597331));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.96171570733, -4.48054732069, 0.0788476040021));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.96509255828, -4.49186831692, 0.0800053663211));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.98651447893, -4.50711966383, 0.0751427568223));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.02204052319, -4.51020357437, 0.069362108155));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.05341252318, -4.50801179411, 0.0758498856623));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.09994189859, -4.51010899819, 0.0861700496102));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.14130598537, -4.51242236338, 0.0880235822959));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.17780707238, -4.51271531738, 0.0870343912469));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.20533284062, -4.511588301, 0.0888137806594));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.22903093549, -4.51391225157, 0.0901686310854));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.24403345107, -4.51550968525, 0.0922920908207));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.25662222763, -4.52032712924, 0.0933223547609));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26125799714, -4.52059016479, 0.0911578956173));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26225605245, -4.51910475234, 0.0921242749392));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26372690437, -4.51932358627, 0.0924236937922));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26579878524, -4.51979410148, 0.0919599630572));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26833863595, -4.52297849443, 0.091150848974));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.26997279619, -4.52777807321, 0.0917950702179));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.27555734456, -4.53106131091, 0.092496435146));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.28685562926, -4.535080807, 0.0941741765019));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.29946775557, -4.5334905713, 0.0953235655381));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.31439662041, -4.52622895847, 0.0961345525921));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.3284334457, -4.51379795389, 0.0962757093645));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.34190945948, -4.49157333252, 0.0978583069217));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.3532304895, -4.45562477315, 0.0907340432825));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.36879164015, -4.39561629054, 0.0720304836359));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.38443502206, -4.31557099083, 0.06121548045));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.38725907023, -4.21826047531, 0.0628969741721));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.38029108552, -4.1163207091, 0.0759135849303));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.38064358144, -4.02030761175, 0.0825760237065));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.38229554508, -3.93571808417, 0.086631442842));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.39073716625, -3.8481412693, 0.0813888193551));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.40688592858, -3.73871652761, 0.0744899136146));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.42566745555, -3.62134234191, 0.0823317466977));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.43513162776, -3.51595104792, 0.0941933050822));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.43624223034, -3.4109512707, 0.0894291643707));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.43506255053, -3.29572187667, 0.0697913946634));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.43026333327, -3.16967627505, 0.0636334347496));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.42344312679, -3.05266523309, 0.0810550879181));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.42697275191, -2.95844601941, 0.0886074770896));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.43755610588, -2.86674059749, 0.0818495731369));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.46018395502, -2.76664086369, 0.0695736282864));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.50364061854, -2.65351552933, 0.068215311582));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.55813883042, -2.53902375992, 0.0968765177467));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.60013260683, -2.43446153374, 0.11621070187));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.63838397011, -2.32773642567, 0.108393471479));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.68078210492, -2.21488556344, 0.0940604301409));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.70960386926, -2.09229018443, 0.0958873148947));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.73801821822, -1.97974657952, 0.111183552914));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.76331393742, -1.88403131253, 0.117863068716));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.79278373929, -1.79497798585, 0.107161812934));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.8348137088, -1.69703514972, 0.0883919676562));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.89843857266, -1.59200879472, 0.0846353373657));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.95575551326, -1.48799932743, 0.0973452607351));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.99837369449, -1.39564932559, 0.100660938374));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.03875383855, -1.28649181836, 0.0884654145826));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.07827204055, -1.1714371159, 0.0770093882792));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.11529781158, -1.05160563402, 0.0802651232489));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.14866206066, -0.945507609808, 0.0942814597921));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.17695980531, -0.853797387996, 0.0984213575205));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.20389096891, -0.760111280255, 0.0843873000952));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.23535019942, -0.65299046541, 0.0729103424093));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.2758186496, -0.536624567726, 0.0798520184566));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.31866669177, -0.433374574908, 0.097898999204));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.34711068971, -0.345571523285, 0.100763588518));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.36966052535, -0.245197684901, 0.0858254043219));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.38492220435, -0.133216642396, 0.068671090614));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.39235518218, 0.000117048731454, 0.0659785426701));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.39800926496, 0.126716509233, 0.0796837608083));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.40466605795, 0.242345796383, 0.0846755629079));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.41153798298, 0.361269960629, 0.079970886237));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.42818189686, 0.492590662201, 0.0770593793468));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.45709454235, 0.629384615714, 0.0858387811413));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.47317302215, 0.746856085827, 0.104623813791));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.49706244228, 0.858336900858, 0.106046383588));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.53272969902, 0.977191645541, 0.0933967614848));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.55917805247, 1.10620743644, 0.0913362409884));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.57849889604, 1.23237140459, 0.111657715434));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.59705537127, 1.34805186899, 0.129621388071));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.62758463178, 1.45289198132, 0.13160927812));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.68036852304, 1.55010756213, 0.122453803002));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.76390385983, 1.6429832416, 0.114744710751));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.8573823436, 1.73286426018, 0.121704657833));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.92723477022, 1.8142637682, 0.133479820493));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.99133384776, 1.89838833264, 0.123442045552));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.04404522894, 1.99458898066, 0.100743107394));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.08187813431, 2.10460180828, 0.0958342963073));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.10645486311, 2.21348895534, 0.105053997072));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.11725448228, 2.31283425543, 0.112650975186));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.11695131809, 2.41812514949, 0.107562525152));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.12407614546, 2.53004020846, 0.102500313898));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.147934164, 2.65829686291, 0.0987053840464));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.18093309589, 2.78800235434, 0.0989306221858));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.19931230823, 2.89920710971, 0.103779506456));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.21348170161, 3.00858949221, 0.101303655143));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.22497651933, 3.13026066584, 0.0918608209505));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.23675304887, 3.25651081673, 0.0963139076245));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.24286435907, 3.37314591435, 0.120291843286));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.25056512499, 3.47565367146, 0.139730450257));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.26321375778, 3.56866579484, 0.140983018847));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.28174729147, 3.66645703842, 0.125425439914));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.32368691249, 3.7857165325, 0.101000939333));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.38375811327, 3.92352192545, 0.0924884834073));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44762463436, 4.04701131136, 0.111879142465));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.49286309116, 4.13335334064, 0.1378230245));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.53377847458, 4.18287569001, 0.152433129323));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.56475547178, 4.2087429604, 0.153250094956));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.59290680919, 4.24455672204, 0.146424533191));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.6110140079, 4.29270432188, 0.140483092457));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.60918188325, 4.33495270197, 0.12193371172));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.59658224262, 4.37428347639, 0.116878242901));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.57727816231, 4.39352298432, 0.122042842407));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.53896259517, 4.40189548928, 0.11827873146));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.49691729109, 4.41611980596, 0.110281237482));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44904794153, 4.43674181314, 0.108674212129));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41674530589, 4.44967461401, 0.117547925571));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.39800714639, 4.45270277179, 0.128476647522));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.39201910102, 4.45733634236, 0.141995623788));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.39297057623, 4.46609838779, 0.153960229135));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.39882080497, 4.48033095921, 0.157225555342));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.40494842975, 4.49137445768, 0.158174652597));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41170672028, 4.5034639905, 0.165325124493));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.42321309417, 4.50860626681, 0.169880548739));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.42867517481, 4.51278066913, 0.170037737695));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43562849409, 4.51508429969, 0.173390078984));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44025156738, 4.5169015864, 0.178194168838));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44098953085, 4.52233341649, 0.181473272496));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.4417013282, 4.52303857154, 0.183750307661));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43934605466, 4.52706441106, 0.185251423401));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43755546189, 4.52883282226, 0.185173535343));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43081845553, 4.53219918761, 0.186137953719));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.42647208625, 4.535080807, 0.18671305328));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.42457469735, 4.53483157622, 0.186621589673));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.42734089377, 4.53098834391, 0.186126888767));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43681041014, 4.51877517915, 0.182735813935));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44912630303, 4.5042110072, 0.180967397832));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.45858424153, 4.48009562101, 0.173674671389));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.46361144642, 4.44435461642, 0.168401232479));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.46547905103, 4.40443036847, 0.170565180265));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.46280002214, 4.35453472167, 0.168009968776));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.45554992339, 4.28239573858, 0.158291997512));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.44756874448, 4.18793516643, 0.150381627488));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.43315991501, 4.07260160827, 0.157132680018));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41560279737, 3.96434760373, 0.17063233693));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41647092324, 3.86990343632, 0.171660735103));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41825715981, 3.77134054001, 0.164590162536));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.4151706682, 3.65329518337, 0.154712431642));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41585826992, 3.51739811696, 0.145261237285));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41316950163, 3.37798099258, 0.151760118946));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.41448138664, 3.25477540488, 0.168534885344));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.40918663177, 3.14499001394, 0.161820118287));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.39219501416, 3.03429925995, 0.148748293902));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.35782629117, 2.90666530821, 0.130710390707));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.29487299289, 2.7553511316, 0.128619610348));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.22882288357, 2.60207601673, 0.141665140178));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.18212419474, 2.46664881069, 0.154463226649));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.13698253597, 2.33076117063, 0.150072772546));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.09122514203, 2.18311137902, 0.140643119221));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.04943493199, 2.02900513365, 0.140963351646));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-7.00373778107, 1.88305095592, 0.160549503428));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.95310996886, 1.74748186429, 0.170860785202));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.89079796341, 1.60661745675, 0.155559475155));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.81818351664, 1.45086066392, 0.133930880216));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.75112800458, 1.29837433155, 0.139261209812));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.69565894588, 1.15608900278, 0.155749686324));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.63472233756, 1.02222326419, 0.15943768688));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.56127749685, 0.889347971682, 0.143730589044));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.48376087633, 0.74491635683, 0.124928965779));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.41264239172, 0.605715618366, 0.138352891109));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.35398194351, 0.482314991979, 0.145078448563));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.31760111551, 0.376377448875, 0.14214942112));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.28696854827, 0.269866966393, 0.126045747191));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.25768716868, 0.149774055805, 0.111568174768));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.22655123509, 0.0263841157553, 0.123604361087));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.19521679443, -0.0885475517061, 0.130255099666));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.16388117464, -0.200109588627, 0.12419789618));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.12177042294, -0.325016018396, 0.109836891025));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.07507986961, -0.455257108371, 0.101472171103));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-6.01999204315, -0.582810387087, 0.107751976982));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.94536960731, -0.664936557468, 0.115928082679));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.85734008744, -0.699291868244, 0.118214041277));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.75884170838, -0.702327957843, 0.119280047693));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.66290574318, -0.689169015005, 0.117323127302));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.56555234316, -0.675322817439, 0.123275801414));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.47518329837, -0.664149286422, 0.138893582358));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.3858710945, -0.664962766846, 0.143121127406));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.29070052721, -0.66877377616, 0.129004980925));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.17946726209, -0.676590286803, 0.116228002902));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-5.06605141203, -0.683506239614, 0.126763835422));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.97517527266, -0.680330022155, 0.147271512867));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.89753111703, -0.677735874951, 0.1458200556));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.80742543192, -0.674850720128, 0.126554370103));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.7107056041, -0.663323344199, 0.118444284042));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.60699552062, -0.646684863062, 0.125930741365));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.52752484204, -0.647682635666, 0.140753957897));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.44827021592, -0.653725805742, 0.139326400471));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.35207626879, -0.654567870754, 0.118977120418));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.24446087374, -0.656710591767, 0.115133956135));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.14222880435, -0.658276763756, 0.141550449727));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.07186106909, -0.646840467257, 0.157307280277));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-4.00970373653, -0.636478194581, 0.144230489981));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.92851307618, -0.627959324874, 0.129325890602));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.83662861978, -0.618512023088, 0.142044685487));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.75321341736, -0.6094190643, 0.164721456772));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.68333402072, -0.600052301691, 0.167181977184));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.60703010905, -0.587921987901, 0.154942553213));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.51353672464, -0.58415733193, 0.147079384381));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.41337357623, -0.582005282827, 0.161803302484));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.33075272852, -0.579547129915, 0.188983265067));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.28260187032, -0.552065618208, 0.193305043442));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.23999217092, -0.508290633644, 0.179790211454));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.18926227695, -0.428558659574, 0.154663068393));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.11733466693, -0.312317872537, 0.128903191684));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-3.03842629841, -0.184694351758, 0.136144596256));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.96640131525, -0.0773716998753, 0.165051243815));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.89759564574, 0.00124723687685, 0.177088923125));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.8270285475, 0.0654022505209, 0.160288081325));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.74663493246, 0.118171922231, 0.148394532346));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.67035780846, 0.157406300359, 0.157865478297));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.60735750403, 0.181338008358, 0.170807876017));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.54162393716, 0.192376745374, 0.165007855882));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.4570413706, 0.206847653934, 0.146796646676));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.3540140366, 0.242187775847, 0.144280573981));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.25797392441, 0.269243037873, 0.170120094737));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.17618993718, 0.272102108833, 0.171292636906));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-2.08565225722, 0.272615469683, 0.14935701889));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.98088236257, 0.265618594616, 0.138129766625));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.86789615444, 0.261378147435, 0.154066887672));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.77096674661, 0.268009500356, 0.174945755174));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.68123931722, 0.274786887246, 0.17726686057));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.58794493482, 0.291314005375, 0.155421322755));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.47414806511, 0.327709767479, 0.148944052252));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.36119418632, 0.367357705968, 0.170636547507));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.26913709512, 0.389393230243, 0.18084100761));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.16882127098, 0.397721156234, 0.161746993557));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-1.05270375643, 0.404560339147, 0.138604808417));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.92556615624, 0.407640078243, 0.145918825863));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.814253511998, 0.416434883332, 0.160561884206));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.712914483146, 0.427791008733, 0.155976160059));
+  
+  	line_geometry.vertices.push(new THREE.Vector3(-0.606130892406, 0.447527349306, 0.133533820664));
+  
+  var line = new THREE.Line(line_geometry, line_material);
+  scene.add(line);
+
+  // Add the X-Y grid
+  plane_geometry = new THREE.PlaneGeometry(18.0, 18.0, 18, 18);
+  plane_material = new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true});
+  plane = new THREE.Mesh(plane_geometry, plane_material);
+  scene.add(plane);
+
+
+  // Add lights
+
+  // light = new THREE.DirectionalLight( 0xffffff );
+  // light.position.set( 1, 1, 1 );
+  // scene.add( light );
+
+  // light = new THREE.DirectionalLight( 0x002288 );
+  // light.position.set( -1, -1, -1 );
+  // scene.add( light );
+
+  // light = new THREE.AmbientLight( 0x222222 );
+  // scene.add( light );
+
+
+  // Create renderer
+  renderer = new THREE.WebGLRenderer( { antialias: false } );
+  renderer.setClearColor( scene.fog.color, 1 );
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+  container = document.getElementById( 'container' );
+  container.appendChild( renderer.domElement );
+
+  window.addEventListener( 'resize', onWindowResize, false );
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  render();
+}
+
+function animate() {
+  requestAnimationFrame( animate );
+  controls.update();
+}
+
+function render() {
+  renderer.render( scene, camera );
+}
+
+</script>
+</body>
+</html>
