@@ -36,7 +36,6 @@ def main():
 
     axes = threeplot.Axes()
     axes.add_series(vertices=positions, line_width=2, line_color='0xff0000', line_style='solid')
-
     threeplot.dump(axes, args.output)
 
 
