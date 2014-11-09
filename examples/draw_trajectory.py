@@ -1,7 +1,7 @@
 import argparse
-
 import numpy as np
-from jinja2 import Environment, FileSystemLoader
+
+import threeplot
 
 
 def camera_center(P):
@@ -27,28 +27,18 @@ def load_trajectory_from_text(path):
 
 
 def main():
-	parser = argparse.ArgumentParser()
-	parser.add_argument('input', type=str)
-	parser.add_argument('output', type=str)
-	args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', type=str)
+    parser.add_argument('output', type=str)
+    args = parser.parse_args()
 
-	env = Environment(loader=FileSystemLoader('templates'))
-	template = env.get_template('viewer.html')
+    timestamps, positions = load_trajectory_from_text(args.input)
 
-	timestamps, positions = load_trajectory_from_text(args.input)
+    axes = threeplot.Axes()
+    axes.add_series(vertices=positions, line_width=2, line_color='0xff0000', line_style='solid')
 
-	lo = np.min(positions, axis=0)
-	hi = np.max(positions, axis=0)
-	positions -= (lo + hi) / 2
-	diameter = np.ceil(np.linalg.norm(hi - lo))
-	num_grid_cells = int(diameter)
-
-	with open(args.output, 'w') as fd:
-		fd.write(template.render(vertices=positions,
-								 diameter=diameter,
-								 num_grid_cells=num_grid_cells));
+    threeplot.dump(axes, args.output)
 
 
 if __name__ == '__main__':
-	main()
-
+    main()

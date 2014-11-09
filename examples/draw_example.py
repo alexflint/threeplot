@@ -1,24 +1,3 @@
-# Threeplot
-
-HTML-based 3D plotting in Python
-
-Threeplot is a simple 3D plotting library for python. It generates HTML files as output, which contain an interactive 3D plots based on WebGL and Three.js. Reasons to use threeplot:
-
-- *Installation is easy*. It has no dependencies whatsoever. There is no need to install Qt, wx, or any other GUI toolkit.
-
-- *Collaboration is easy*. Output is a single HTML file, which is easy to share and publish.
-
-Installation:
-
-```bash
-$ pip install threeplot
-```
-
-Usage:
-
-Although this example uses numpy, note that threeplot does not itself require numpy.
-
-```python
 import numpy as np
 
 import threeplot
@@ -57,4 +36,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
