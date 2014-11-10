@@ -1,10 +1,28 @@
 import os
 import json
+import math
 import string
-import argparse
 
 TEMPLATE_DIR = 'templates'
 VIEWER_TEMPLATE_FILENAME = 'viewer.html'
+
+
+def min_axis0(xs):
+    """We want to avoid a strict dependency on numpy but we still want to use efficient
+    numpy array funcs when an ndarray is given to us."""
+    if hasattr(xs, 'min'):
+        return xs.min(axis=0)
+    else:
+        return [min(x[i] for x in xs) for i in range(3)]
+
+
+def max_axis0(xs):
+    """We want to avoid a strict dependency on numpy but we still want to use efficient
+    numpy array funcs when an ndarray is given to us."""
+    if hasattr(xs, 'min'):
+        return xs.max(axis=0)
+    else:
+        return [max(x[i] for x in xs) for i in range(3)]
 
 
 class Axes(object):
@@ -22,7 +40,22 @@ class Axes(object):
         self._objects.append(Series(*args, **kwargs))
 
     def spec(self):
-        return dict(objects=[obj.spec() for obj in self.objects])
+        lo, hi = self.compute_bounds()
+        lo = map(math.floor, lo)
+        hi = map(math.ceil, hi)
+        grid_spec = dict(xmin=lo[0],
+                         ymin=lo[1],
+                         xmax=hi[0],
+                         ymax=hi[1],
+                         xspacing=1,
+                         yspacing=1)
+        return dict(grid=grid_spec,
+                    objects=[obj.spec() for obj in self.objects])
+
+    def compute_bounds(self):
+        lo = min_axis0([min_axis0(obj.vertices) for obj in self.objects])
+        hi = max_axis0([max_axis0(obj.vertices) for obj in self.objects])
+        return lo, hi
 
 
 class Series(object):

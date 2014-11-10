@@ -7,7 +7,7 @@ def main():
     axes = threeplot.Axes()
 
     # Generate some sinusoids in the XY plane
-    xs = np.linspace(-10, 10, 10)
+    xs = np.linspace(-10, 10, 40)
     ys = np.sin(xs * .2) * 2
     zs = np.zeros(len(xs))
     axes.add_series(vertices=zip(xs, ys, zs),
@@ -32,7 +32,7 @@ def main():
                     line_style='solid')
 
     # Generate a point cloud
-    pts = np.random.randn(20, 3)
+    pts = np.random.randn(50, 3)
     axes.add_series(vertices=pts,
                     marker_size=5,
                     marker_color='0x0000ff')

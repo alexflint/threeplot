@@ -98,7 +98,7 @@ function createObjectsFromSpec(spec) {
 function init() {
   container = document.getElementById( 'container' );
 
-  camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, .1, 1000);
+  camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, .1, 10000);
   camera.position.z = 500;
 
   controls = new THREE.OrbitControls(camera);
@@ -106,17 +106,15 @@ function init() {
 
   scene = new THREE.Scene();
 
-  background_color = 0x3e3e3e;
-  xmin = -20
-  xmax = 20
-  ymin = -20
-  ymax = 20
-  xspacing = 1
-  yspacing = 1
+  grid_spec = spec['grid'];
+  xmin = grid_spec['xmin'];
+  xmax = grid_spec['xmax'];
+  ymin = grid_spec['ymin'];
+  ymax = grid_spec['ymax'];
+  xspacing = grid_spec['xspacing'];
+  yspacing = grid_spec['yspacing'];
 
   // Add the X-Y grid
-  //plane_geometry = new THREE.PlaneGeometry(40, 40, 40, 40);
-  // Add x-lines
   grid_geometry = new THREE.Geometry();
   for (var x = xmin; x <= xmax; x += xspacing) {
     grid_geometry.vertices.push(new THREE.Vector3(x, ymin, 0));
@@ -142,6 +140,8 @@ function init() {
   }
 
   // Create renderer
+  background_color = 0x3e3e3e;
+
   renderer = new THREE.WebGLRenderer( { antialias: false } );
   renderer.setClearColor(background_color, 1);
   renderer.setSize( window.innerWidth, window.innerHeight );
