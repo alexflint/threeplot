@@ -25,6 +25,12 @@ def main():
                     line_color='0x555500',
                     line_style='dotted')
 
+    zs = np.linspace(-12, 12, 50)
+    axes.add_series(vertices=zip(np.sin(zs), np.cos(zs), zs),
+                    line_width=3,
+                    line_color='0x009999',
+                    line_style='solid')
+
     # Generate a point cloud
     pts = np.random.randn(20, 3)
     axes.add_series(vertices=pts,
